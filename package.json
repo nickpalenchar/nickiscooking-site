@@ -13,5 +13,11 @@
     "@astrojs/rss": "^4.0.10",
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-plugin-astro": "^0.34.0",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
