@@ -16,13 +16,15 @@ const blog = defineCollection({
 })
 
 const recipes = defineCollection({
-  loader: glob({ base: './src/content/recipes', pattern: '**/*.{md,mdx}' }),
+  loader: glob({ base: './src/content/recipes', pattern: '**/*.{md,mdx,tsx}' }),
 
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
     tags: z.array(z.string()),
-    date: z.date(),
+		date: z.date(),
+		ingredients: z.array(z.string()),
+		steps: z.array(z.string())
   }),
 })
 
