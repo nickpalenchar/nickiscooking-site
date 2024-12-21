@@ -1,5 +1,5 @@
 ---
-title: ''
+title: '<< snakeToTitleCase(args[0]) >>'
 description: ''
 tags: []
 date: << formatDate(Date.now()) >>

@@ -67,14 +67,14 @@ const renderMarkdown = (markdown: string) =>
     <!-- Steps Section -->
     <section class="col-span-1 lg:col-span-2">
       <h2 class="text-2xl font-semibold mb-4">Steps</h2>
-      <ol class="list-decimal list-inside space-y-2">
+      <ol class="list-decimal list-inside space-y-5">
         {steps.map((step, index) => <li set:html={renderMarkdown(step)} />)}
       </ol>
       {
         tips && (
           <>
-            <h2 class="text-2xl font-semibold mb-4">Tips</h2>
-            <ul class="list-none space-y-2">
+            <h2 class="text-2xl font-semibold mb-4 pt-4">Tips</h2>
+            <ul class="list-disc space-y-2">
               {tips.map((tip) => (
                 <li set:html={renderMarkdown(tip)} />
               ))}
