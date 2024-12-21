@@ -1,18 +1,24 @@
 ---
+import BaseHead from '../components/BaseHead.astro'
+
 const { title, description, date, tags } = Astro.props
 ---
 
-<article>
-  <header>
-    <h1>{title}</h1>
-    <p>{description}</p>
-    <p><small>{new Date(date).toLocaleDateString()}</small></p>
-    <ul>
-      {tags.map((tag: string) => <li>{tag}</li>)}
+<BaseHead title={title} description={description} />
+<article class="container mx-auto p-8">
+  <header class="mb-8">
+    <h1 class="text-4xl font-bold">{title}</h1>
+    <p class="text-lg text-gray-600">{description}</p>
+    <p class="text-sm text-gray-500">{new Date(date).toLocaleDateString()}</p>
+    <ul class="flex gap-2 mt-2">
+      {
+        tags.map((tag) => (
+          <li class="bg-blue-100 text-blue-600 px-2 py-1 rounded">{tag}</li>
+        ))
+      }
     </ul>
   </header>
-
-  <main>
+  <main class="prose">
     <slot />
   </main>
 </article>
