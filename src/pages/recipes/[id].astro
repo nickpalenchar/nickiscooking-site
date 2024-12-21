@@ -1,24 +1,23 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
-import Recipe from '../../layouts/Recipe.astro';
+import { getCollection, getEntry } from 'astro:content'
+import Recipe from '../../layouts/Recipe.astro'
 
 export async function getStaticPaths() {
-  const recipes = await getCollection('recipes');
-  return recipes.map(recipe => ({
+  const recipes = await getCollection('recipes')
+  return recipes.map((recipe) => ({
     params: { id: recipe.id },
-  }));
+  }))
 }
 
-const { id } = Astro.params;
+const { id } = Astro.params
 if (!id) {
   throw new Error('No slug found in params')
 }
-const recipe = await getEntry('recipes', id);
+const recipe = await getEntry('recipes', id)
 
 if (!recipe) {
-  throw new Error(`Recipe not found for slug: ${id}`);
+  throw new Error(`Recipe not found for slug: ${id}`)
 }
-
 ---
 
 <Recipe
@@ -28,4 +27,6 @@ if (!recipe) {
   tags={recipe.data.tags}
   ingredients={recipe.data.ingredients}
   steps={recipe.data.steps}
+  tips={recipe.data.tips}
+  addendum={recipe.data.addendum}
 />

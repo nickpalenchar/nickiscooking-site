@@ -1,18 +1,30 @@
 ---
-import { marked } from 'marked';
+import { marked } from 'marked'
 import insane from 'insane'
 interface Props {
-  title: string;
-  description: string;
-  date: Date | string;
-  tags: string[];
-  ingredients: string[];
-  steps: string[];
+  title: string
+  description: string
+  date: Date | string
+  tags?: string[]
+  ingredients: string[]
+  steps: string[]
+  tips?: string[]
+  addendum?: Array<Record<string, string>>
 }
 
-const { title, description, date, tags, ingredients, steps } = Astro.props;
+const {
+  title,
+  description,
+  date,
+  tags = [],
+  ingredients,
+  steps,
+  tips,
+  addendum,
+} = Astro.props
 
-const renderMarkdown = (markdown: string) => insane(marked.parseInline(markdown));
+const renderMarkdown = (markdown: string) =>
+  insane(marked.parseInline(markdown))
 ---
 
 <article class="container mx-auto p-8">
@@ -22,11 +34,17 @@ const renderMarkdown = (markdown: string) => insane(marked.parseInline(markdown)
     <p class="text-lg text-gray-600">{description}</p>
     <p class="text-sm text-gray-500">{new Date(date).toLocaleDateString()}</p>
     <ul class="flex gap-2 mt-2">
-      {tags.map(tag => (
-        <li key={tag} class="bg-blue-100 text-blue-600 px-2 py-1 rounded" style="display: inline">
-          {tag}
-        </li>
-      ))}
+      {
+        tags.map((tag) => (
+          <li
+            key={tag}
+            class="bg-blue-100 text-blue-600 px-2 py-1 rounded"
+            style="display: inline"
+          >
+            {tag}
+          </li>
+        ))
+      }
     </ul>
   </header>
 
@@ -36,9 +54,11 @@ const renderMarkdown = (markdown: string) => insane(marked.parseInline(markdown)
     <aside class="col-span-1 bg-gray-50 p-4 rounded shadow">
       <h2 class="text-2xl font-semibold mb-4">Ingredients</h2>
       <ul class="list-disc list-inside">
-        {ingredients?.map(ingredient => (
-          <li set:html={renderMarkdown(ingredient)} />
-        ))}
+        {
+          ingredients?.map((ingredient) => (
+            <li set:html={renderMarkdown(ingredient)} />
+          ))
+        }
       </ul>
     </aside>
 
@@ -46,10 +66,33 @@ const renderMarkdown = (markdown: string) => insane(marked.parseInline(markdown)
     <section class="col-span-2 bg-white p-4 rounded shadow">
       <h2 class="text-2xl font-semibold mb-4">Steps</h2>
       <ol class="list-decimal list-inside">
-        {steps.map((step, index) => (
-          <li set:html={renderMarkdown(step)}></li>
-        ))}
+        {steps.map((step, index) => <li set:html={renderMarkdown(step)} />)}
       </ol>
+      {
+        tips && (
+          <>
+            <h2 class="text-2xl font-semibold mb-4">Steps</h2>
+            <ol class="list-decimal list-inside">
+              {steps.map((step, index) => (
+                <li set:html={renderMarkdown(step)} />
+              ))}
+            </ol>
+          </>
+        )
+      }
+      {
+        addendum &&
+          addendum.map((section) => {
+            const title = Object.keys(section)[0]
+            const body = section[title]
+            return (
+              <>
+                <h2 class="text-2xl font-semibold mb-4">{title}</h2>
+                <p>{body}</p>
+              </>
+            )
+          })
+      }
     </section>
   </div>
 </article>
