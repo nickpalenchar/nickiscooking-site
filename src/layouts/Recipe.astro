@@ -1,0 +1,18 @@
+---
+const { title, description, date, tags } = Astro.props
+---
+
+<article>
+  <header>
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <p><small>{new Date(date).toLocaleDateString()}</small></p>
+    <ul>
+      {tags.map((tag: string) => <li>{tag}</li>)}
+    </ul>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+</article>

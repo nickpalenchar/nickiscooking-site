@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content'
+const recipes = (await getCollection('recipes')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
+---
+
+<article>
+  <h1>Recipes</h1>
+  <ul>
+    {
+      recipes.map((recipe) => (
+        <li>
+          {console.log(recipe)}
+          <a href={`/recipes/${recipe.id}`}>{recipe.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</article>
