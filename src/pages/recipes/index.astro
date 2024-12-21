@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
 const recipes = (await getCollection('recipes')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 )
 ---
 

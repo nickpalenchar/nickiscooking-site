@@ -1,4 +1,6 @@
 ---
+import { marked } from 'marked';
+import insane from 'insane'
 interface Props {
   title: string;
   description: string;
@@ -9,6 +11,8 @@ interface Props {
 }
 
 const { title, description, date, tags, ingredients, steps } = Astro.props;
+
+const renderMarkdown = (markdown: string) => insane(marked.parseInline(markdown));
 ---
 
 <article class="container mx-auto p-8">
@@ -19,7 +23,7 @@ const { title, description, date, tags, ingredients, steps } = Astro.props;
     <p class="text-sm text-gray-500">{new Date(date).toLocaleDateString()}</p>
     <ul class="flex gap-2 mt-2">
       {tags.map(tag => (
-        <li key={tag} class="bg-blue-100 text-blue-600 px-2 py-1 rounded">
+        <li key={tag} class="bg-blue-100 text-blue-600 px-2 py-1 rounded" style="display: inline">
           {tag}
         </li>
       ))}
@@ -33,7 +37,7 @@ const { title, description, date, tags, ingredients, steps } = Astro.props;
       <h2 class="text-2xl font-semibold mb-4">Ingredients</h2>
       <ul class="list-disc list-inside">
         {ingredients?.map(ingredient => (
-          <li key={ingredient}>{ingredient}</li>
+          <li set:html={renderMarkdown(ingredient)} />
         ))}
       </ul>
     </aside>
@@ -43,7 +47,7 @@ const { title, description, date, tags, ingredients, steps } = Astro.props;
       <h2 class="text-2xl font-semibold mb-4">Steps</h2>
       <ol class="list-decimal list-inside">
         {steps.map((step, index) => (
-          <li key={index} class="mb-2">{step}</li>
+          <li set:html={renderMarkdown(step)}></li>
         ))}
       </ol>
     </section>
