@@ -13,7 +13,7 @@ steps:
   - '**Bake**: 5-7 minutes, until crisps are _slightly_ darker.'
   - '**Remove and cool**: remove from the oven and lift up parchment paper with crisps. Place on counter and let cool for 2 minutes.'
 tips:
-  - Avoid pre-shredded parmesan as it may have additives that will prevent the cheese from sticking together.'
+  - Avoid pre-shredded parmesan as it may have additives that will prevent the cheese from sticking together.
   - "**Crisps overcook fast**: When starting, it's better to undercook. If a few crisps are a bit white in the center but the rest have sightly browned, it's probably best to remove."
 addendum:
   - storage: Store in an air-tight container at room temperature fo 5-7 days.

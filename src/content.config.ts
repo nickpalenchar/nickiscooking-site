@@ -20,13 +20,14 @@ const recipes = defineCollection({
 
   schema: z.object({
     title: z.string(),
-    nicksRating: z.number().min(1).max(5).optional(),
-    prepTimeMins: z.number().optional(),
-    cookTimeMins: z.number().optional(),
-    difficulty: z.number().optional(),
     description: z.string().optional(),
     tags: z.array(z.string()).optional(),
     date: z.date(),
+    difficulty: z.number().optional(),
+    prepTimeMins: z.number().optional(),
+    cookTimeMins: z.number().optional(),
+    nicksRating: z.number().min(1).max(5).optional(),
+    equipment: z.array(z.string()).optional(),
     // main body of the recipe
     ingredients: z.array(z.string()),
     steps: z.array(z.string()),
